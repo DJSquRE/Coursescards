@@ -84,9 +84,7 @@ def login_view(request):
     return render(request,"registration/login.html",{"form":form})
 
 
-
-
-#testing_view
+#testing_view_for_courses_and_subjects
 def testview(request):
     subjects=Subject.objects.prefetch_related("subjects")
 

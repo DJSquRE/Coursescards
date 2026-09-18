@@ -4,7 +4,7 @@ from .models import Course,Subject
 from django.core.exceptions import ValidationError
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display=['id','course_name',"created_at","updated_at","status"]
+    list_display=['course_name',"created_at","updated_at","status"]
 
 class SubjectAdmin(admin.ModelAdmin):
     list_display=['id',"subject"]

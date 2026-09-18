@@ -11,7 +11,7 @@ from django.core.exceptions import ValidationError
 
 class Subject(models.Model):
 
-    subject=models.CharField(max_length=50 ,name="subject")
+    subject=models.CharField(max_length=50)
     # Course=models.ForeignKey(Course,on_delete=models.CASCADE,related_name="subjects")
     def __str__(self):
         return f"{self.subject}"
@@ -22,17 +22,17 @@ class Course(models.Model):
          ("active","ACTIVE"),
          ("inactive","INACTIVE")
     ]
-    course_name=models.CharField(max_length=50)
+    course_name=models.CharField(max_length=50,unique=True)
 
     subjects=models.ManyToManyField(Subject,related_name="courses")
     
-#     class Meta:
-#          constraints=[
-#               models.UniqueConstraint(
-#                    fields=['course_name','Subject'],
-#                    name="primary"
-#               )
-#          ]
+    # class Meta:
+    #      constraints=[
+    #           models.UniqueConstraint(
+    #                fields=['course_name','subjects'],
+    #                name="primary"
+    #           )
+    #      ]
     image=models.ImageField(upload_to="course/")
 
     status=models.CharField(

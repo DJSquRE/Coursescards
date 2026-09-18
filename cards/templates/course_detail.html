@@ -17,15 +17,27 @@
 </head>
 <body id="back">
 
-{% if user.is_superuser %}
+
     <div class="container">
-  
+    <div class="container-fluid">
+    
+    <div style="display: flex; justify-content:right; align-items: center; background-color: #303131; padding: 15px; border: 1px solid #e7e7e7; border-radius: 5px; margin-bottom: 25px;">
+       <div class="text-right" style="margin-bottom: 20px;">
+           <a href="{% url 'courseview' %}">
+             <button type="button" class="btn btn-info btn-lg explicit" >
+            Back
+            </button>
+           </a>
+        </div>
+        {% if user.is_superuser %}
         <div class="text-right" style="margin-bottom: 20px;">
             <button id="coursebutton" type="button" class="btn btn-info btn-lg explicit" data-toggle="modal" data-target="#myModal">
             Edit Course
             </button>
         </div>
-
+        {% endif %}
+    </div>
+</div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -63,22 +75,31 @@
   </div>
   
 </div> <!-- End of Container. Removed the extra rogue </div> -->
-{% endif %}
+
 
 
     <div class="detail"> 
         <div class="heading">
-            <h1 style="color:rgb(17, 17, 151)">{{course.course_name}}</h1>
-            <p>{{course.Subject}}</p>
+           <div class="coursediv">
+             <h1 class="courseheading">{{course.course_name}}</h1>
+            
             <p style="text-align: left;font-size: 15px;">{{course.created_at}}</p>
+           </div>
         </div>
 
         
 
         <div class="description">
+            <h2 style="font-weight: bold;font-size:35px;">Subjects:</h2>
+            <ul>{% for subject in course.subjects.all %}
+            
+                <li>{{subject.subject}}</li>
+            {% endfor %}</ul>
+
+            <div class="main-description">
             <p>{{course.description}}</p>
 
-            <div>
+            
                  <img src="{{course.image.url}}" alt="courses-image" style="width: 200px;height: 150px;">     
             </div>
             </div>

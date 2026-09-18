@@ -1,4 +1,4 @@
-.courses-grid {
+.courses-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 30px; 
@@ -7,7 +7,7 @@
     margin-left: 110px;
 }
 
-.card {
+.card{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 5px;
     display: flex;
@@ -16,23 +16,23 @@
     width: 65%;
 }
 
-.card img {
+.card img{
     width: 100%;
     height: 160px;
     object-fit: cover; 
 }
 
-.container {
+.container{
     padding: 15px;
     flex-grow: 1; 
 }
 
-.btn-wrapper {
+.btn-wrapper{
     margin-top: auto; 
     width: 100%;
 }
 
-#explicit {
+#explicit{
     background-color: rgb(8, 63, 126);
     font-size: 20px;
     color: white;
@@ -42,7 +42,25 @@
     cursor: pointer;
 }
 
-#explicit:hover {
+#explicit:hover{
     background-color: rgb(7, 18, 82);
     box-shadow: 0 4px 8px 0 rgb(4, 30, 61);
+}
+
+.heading{
+   text-align: left;
+}
+.courseheading{
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+}
+.coursediv{
+    border-bottom: 5px solid black;
+}
+.description{
+    padding: 5px;
+}
+.main-description{
+    display: inline-block;
 }

@@ -11,16 +11,15 @@ class CourseForm(forms.ModelForm):
                 "class":"form-control",
                 "placeholder":"Enter Course Name"
             }),
-            "subjects":forms.SelectMultiple(attrs={
-                            "class":"form-control",
-                            "placeholder":"Select Subject"
+            "subjects":forms.CheckboxSelectMultiple(attrs={
+                            "class":"form-check"
                         }),
             "image":forms.FileInput(attrs={
                             "class":"form-control",
                             'accept': 'image/*'
                         }),
-            "status":forms.Select(attrs={
-                            "class":"form-control"
+            "status":forms.RadioSelect(attrs={
+                            "class":"form-check"
                         }),
             "description":forms.Textarea(attrs={
                             "class":"form-control",
