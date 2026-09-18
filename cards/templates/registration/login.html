@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    
+   <div class="center">
+	  <form method="post" class="card" novalidate>
+	  	{% csrf_token %}
+	    <h2 class="text-center">Log in to your account</h2>
+        <br>
+		<div style="text-align: center;">
+            {{form.as_p}}
+        <input type="submit" value="Login" class="btn btn-primary full-width">
+        </div>
+		
+		<hr>
+		<p class="text-center">Don't have a account? <a href="#">Join Now</a></p>
+	</form>
+</div>
+
+</body>
+</html>
