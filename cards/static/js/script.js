@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } else { 
                 for (let field in data.errors) {
                     for(let i=0;i<data.errors[field].length;i++)
-                        errorBox.innerHTML += `<p> > ${data.errors[field][i]}</p>`;
-                        
+                        errorBox.innerHTML += `<p> > ${data.errors[field][i]}</p>`;                 
                 }
             }
         

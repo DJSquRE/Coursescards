@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -12,10 +13,9 @@
 </head>
 <body>
     
-   <div class="center">
-	  <form method="post" class="card" novalidate>
-	  	{% csrf_token %}
-	    <h2 class="text-center">Log in to your account</h2>
+   <div class="center formclass">
+	  <!-- <form method="post" class="card" novalidate>
+	  	
         <br>
 		<div style="text-align: center;">
             {{form.as_p}}
@@ -23,8 +23,27 @@
         </div>
 		
 		<hr>
-		<p class="text-center">Don't have a account? <a href="#">Join Now</a></p>
-	</form>
+	</form> -->
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+	    <h2 class="text-center">Log in to your account</h2>
+  <div class="form-group">
+    {% if error %}
+    <p style="color: red;">{{error}}!</p>
+    {% endif %}
+    <label for="exampleInputEmail1">Username</label>
+    <input style="width: 30%;" type="text" id="user" name="loguser" class="form-control"  placeholder="Enter Username">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input style="width: 30%;" type="password" name="logpass" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+
+  <button style="margin-left: 45%;" type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+    <p style="text-align: center;">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
 </div>
 
 </body>
