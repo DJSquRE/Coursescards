@@ -27,17 +27,34 @@
     <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
 	    <h2 class="text-center">Log in to your account</h2>
+
+        {% if form.non_field_errors %}
+    <div class="your-custom-error-class" style="color: red; text-align: center;">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+    </div>
+        {% endif %}
+
   <div class="form-group">
-    {% if error %}
-    <p style="color: red;">{{error}}!</p>
+    <label for="user">Username</label>
+    {% if form.username.errors %}
+    {% for error in form.username.errors %}
+    <p class="your-custom-error-class" style="color: red; text-align: left;">
+        {{error}}</p>
+        {% endfor %}
     {% endif %}
-    <label for="exampleInputEmail1">Username</label>
-    <input style="width: 30%;" type="text" id="user" name="loguser" class="form-control"  placeholder="Enter Username">
+    <input style="width: 30%;" type="text" id="user" name="username" class="form-control"  placeholder="Enter Username">
   </div>
 
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input style="width: 30%;" type="password" name="logpass" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="password1">Password</label>
+    {% if form.password.errors %}
+    {% for error in form.password.errors %}
+    <p class="your-custom-error-class" style="color: red; text-align: left;">{{error}}</p>
+        {% endfor %}
+    {% endif %}
+    <input style="width: 30%;" type="password" name="password" class="form-control" id="password1" placeholder="Password">
   </div>
 
   <button style="margin-left: 45%;" type="submit" class="btn btn-primary">Submit</button>

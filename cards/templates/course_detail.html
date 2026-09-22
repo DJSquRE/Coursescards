@@ -22,20 +22,21 @@
     <div class="container-fluid">
     
     <div style="display: flex; justify-content:right; align-items: center; background-color: #303131; padding: 15px; border: 1px solid #e7e7e7; border-radius: 5px; margin-bottom: 25px;">
-       <div class="text-right" style="margin-bottom: 20px;">
-           <a href="{% url 'courseview' %}">
-             <button type="button" class="btn btn-info btn-lg explicit" >
+      
+       
+        <div class="text-right" style="margin-bottom: 20px;">
+            <a href="{% url 'courseview' %}">
+             <button id="backbutton" type="button" class="btn btn-info btn-lg explicit" >
             Back
             </button>
            </a>
-        </div>
-        {% if user.is_superuser %}
-        <div class="text-right" style="margin-bottom: 20px;">
+            {% if user.is_superuser %}
             <button id="coursebutton" type="button" class="btn btn-info btn-lg explicit" data-toggle="modal" data-target="#myModal">
             Edit Course
             </button>
+            {% endif %}
         </div>
-        {% endif %}
+        
     </div>
 </div>
         <!-- Modal -->

@@ -1,11 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import Course,Subject
-from .forms import CourseForm
-from django.contrib import messages
-from django.contrib.auth.models import User
+from .forms import CourseForm,UserLoginForm,UserRegisterForm
 from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 # Create your views here.
@@ -73,37 +71,55 @@ def login_view(request):
         return redirect("courseview")
     
     if request.method=="POST":
-        user_name=request.POST.get("loguser")
-        pass_word=request.POST.get("logpass")
+        form=UserLoginForm(request,data=request.POST)
 
-        user=authenticate(request,username=user_name ,password=pass_word)
-
-        if user is not None:
+        if form.is_valid():
+            user=form.get_user()
             login(request,user)
+
             return redirect("courseview")
+    else:
+        form=UserLoginForm()
+        # user_name=request.POST.get("loguser")
+        # pass_word=request.POST.get("logpass")
 
-        else:
-            return render(request,"registration/login.html",{"error":"Invalid Username or Password"})
+        # user=authenticate(request,username=user_name ,password=pass_word)
 
+        # if user is not None:
+        #     login(request,user)
+        #     return redirect("courseview")
 
-    return render(request,"registration/login.html")
+        # else:
+        #     return render(request,"registration/login.html",{"error":"Invalid Username or Password"})
+
+    return render(request,"registration/login.html",{"form":form})
 
 def register_view(request):
     if request.method=="POST":
-       user_name=request.POST.get("username")
-       pass_word=request.POST.get("password")
 
-       if User.objects.filter(username=user_name).exists():
-           messages.error(request, "Username is already taken.")
-           return redirect("register")
+       form=UserRegisterForm(request.POST)
 
-       user = User.objects.create_user(username=user_name, password=pass_word)
-       user.save()
-       messages.success(request, "Registration successful! Now Log in : ")
-       
+       if form.is_valid():
+           form.save()
+           return redirect('login')
+    else:
+        form=UserRegisterForm()
+           
+ 
+    return render(request,"registration/register.html",{"form":form})
+
+       #    user_name=request.POST.get("username")
+        #    pass_word=request.POST.get("password")
     
-    return render(request,"registration/register.html")
-
+        #    if User.objects.filter(username=user_name).exists():
+        #        messages.error(request, "Username is already taken.")
+        #        return redirect("register")
+    
+        #    user = User.objects.create_user(username=user_name, password=pass_word)
+        #    user.save()
+        #    messages.success(request, "Registration successful! Now Log in : ")
+           
+        
 
 def logout_view(request):
     logout(request)

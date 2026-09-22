@@ -15,28 +15,50 @@
     <div class="center formclass">
     <form method="POST" action="{% url 'register' %}">
         {% csrf_token %}
-	    <h2 class="text-center">Register your account</h2>
+        <h2 class="text-center">Register your account</h2>
 
-  <div class="form-group">
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color: red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+        {% if form.non_field_errors %}
+        <div style="color: red; text-align: center;">
+            {% for error in form.non_field_errors %}
+                <p>{{error}}</p>
+            {%endfor%}
+        </div>
+        {% endif %}
 
-    <label for="exampleInputEmail1">Username</label>
-    <input style="width: 30%;" type="text" id="user" name="username" class="form-control"  autocomplete="off" placeholder="Enter Username">
-  </div>
+        <div class="form-group">
+            <label for="user">Username</label>
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                <p style="color: red; text-align: left;">{{error}}</p>
+                {%endfor%}
+            {%endif%}
+            <input style="width: 30%;" type="text" id="user" name="username" class="form-control" autocomplete="off" placeholder="Enter Username">
+        </div>
 
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input style="width: 30%;" type="password" name="password" class="form-control" id="exampleInputPassword1"  autocomplete="off" placeholder="Password">
-  </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            {%if form.password1.errors %}
+               {% for error in form.password1.errors %}
+                <p style="color: red; text-align: left;">{{error}}</p>
+              {%endfor%}
+            {%endif%}
+            <input style="width: 30%;" type="password" name="password1" class="form-control" id="exampleInputPassword1" autocomplete="off" placeholder="Password">
+        </div>
 
-  <button style="margin-left: 45%;" type="submit" class="btn btn-primary">Register</button>
+        <div class="form-group">
+            <label for="exampleInputPassword2">Confirm Password</label>
+            {%if form.password2.errors %}
+                {%for error in form.password2.errors %}
+                <p style="color: red; text-align: left;">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            <input style="width: 30%;" type="password" name="password2" class="form-control" id="exampleInputPassword2" autocomplete="off" placeholder="Confirm Password">
+        </div>
 
-</form>
-    <p style="text-align: center;">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
-</div>
+        <button style="margin-left: 45%;" type="submit" class="btn btn-primary">Register</button>
+
+    </form>
+        <p style="text-align: center;">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+    </div>
 </body>
 </html>
