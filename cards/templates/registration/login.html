@@ -29,7 +29,7 @@
 	    <h2 class="text-center">Log in to your account</h2>
 
         {% if form.non_field_errors %}
-    <div class="your-custom-error-class" style="color: red; text-align: center;">
+    <div style="color: red; text-align: center;">
             {% for error in form.non_field_errors %}
                 <p>{{ error }}</p>
             {% endfor %}
@@ -40,7 +40,7 @@
     <label for="user">Username</label>
     {% if form.username.errors %}
     {% for error in form.username.errors %}
-    <p class="your-custom-error-class" style="color: red; text-align: left;">
+    <p style="color: red; text-align: left;">
         {{error}}</p>
         {% endfor %}
     {% endif %}
@@ -51,7 +51,7 @@
     <label for="password1">Password</label>
     {% if form.password.errors %}
     {% for error in form.password.errors %}
-    <p class="your-custom-error-class" style="color: red; text-align: left;">{{error}}</p>
+    <p style="color: red; text-align: left;">{{error}}</p>
         {% endfor %}
     {% endif %}
     <input style="width: 30%;" type="password" name="password" class="form-control" id="password1" placeholder="Password">

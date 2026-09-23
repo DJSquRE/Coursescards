@@ -1,12 +1,15 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Course
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,PasswordChangeForm
 class UserLoginForm(AuthenticationForm):
     pass
 
 class UserRegisterForm(UserCreationForm):
     pass
 
+class ChangePassword(PasswordChangeForm):
+    pass
 
 
 class CourseForm(forms.ModelForm):

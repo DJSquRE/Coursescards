@@ -96,3 +96,34 @@
     background-color: rgb(126, 0, 0);
     border: 1px solid rgb(126,0,0);
 }
+.dropdown:hover .dropdowncontent{
+    display: block;
+}
+.dropdowncontent{
+display: none;
+position: absolute;
+background-color: white;
+color: black;
+width: 100%;
+font-size: 20px;
+z-index: 1;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    text-align: center;
+}
+.dropdowncontent a{
+    display: block;
+}
+
+.dropbtn{
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}
+a:hover{
+    background-color: rgb(218, 213, 213);
+}
+
+
+.subjects{
+    margin-bottom: 4px;
+}

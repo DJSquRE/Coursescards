@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Course,Subject
-from .forms import CourseForm,UserLoginForm,UserRegisterForm
+from .forms import CourseForm,UserLoginForm,UserRegisterForm,ChangePassword
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -24,19 +24,31 @@ def courseview(request):
     page_obj = paginator.get_page(page_number)
 
     if request.method =="POST":
-        form=CourseForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({"status": "success"})
+        if 'changepassword' in request.POST:
+            form=CourseForm()
+            passform=ChangePassword(user=request.user,data=request.POST)
+
+            if passform.is_valid():
+                passform.save()
+                return redirect("login")
+
         else:
-            return JsonResponse({"status": "error", "errors": form.errors}, status=400)
+            passform=ChangePassword(user=request.user)
+            form=CourseForm(request.POST,request.FILES)
+            if form.is_valid():
+                form.save()
+                return JsonResponse({"status": "success"})
+            else:
+                return JsonResponse({"status": "error", "errors": form.errors}, status=400)
     else:
         form=CourseForm()
-
+        passform=ChangePassword(user=request.user)
+        
     context={
         "courses":page_obj,
         "form":form,
-        "query":search_query
+        "query":search_query,
+        "passform":passform
     }
     return render(request,"course.html",context) 
 
