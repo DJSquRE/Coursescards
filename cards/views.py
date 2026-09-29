@@ -24,13 +24,16 @@ def courseview(request):
     page_obj = paginator.get_page(page_number)
 
     if request.method =="POST":
+        print(request.POST)
         if 'changepassword' in request.POST:
             form=CourseForm()
             passform=ChangePassword(user=request.user,data=request.POST)
 
             if passform.is_valid():
                 passform.save()
-                return redirect("login")
+                return JsonResponse({"status":"success"})
+            else:
+                return JsonResponse({"status":"error","errors":passform.errors},status=400)
 
         else:
             passform=ChangePassword(user=request.user)
@@ -57,23 +60,36 @@ def coursedetail(request,pk):
          return redirect("login")
 
     course=Course.objects.get(pk=pk)
-    form=CourseForm
 
-    if request.method=='POST':
-        form=CourseForm(request.POST,request.FILES,instance=course)
-
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'status': 'success'})
-        else:
-            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
-        
+    if request.method =="POST":
+            print(request.POST)
+            if 'changepassword' in request.POST:
+                form=CourseForm(instance=course)
+                passform=ChangePassword(user=request.user,data=request.POST)
+    
+                if passform.is_valid():
+                    passform.save()
+                    return JsonResponse({"status":"success"})
+                else:
+                    return JsonResponse({"status":"error","errors":passform.errors},status=400)
+    
+            else:
+                passform=ChangePassword(user=request.user)
+                form=CourseForm(request.POST,request.FILES,instance=course)
+                if form.is_valid():
+                    form.save()
+                    return JsonResponse({"status": "success"})
+                else:
+                    return JsonResponse({"status": "error", "errors": form.errors}, status=400)
+                
     else:
         form=CourseForm(instance=course)
+        passform=ChangePassword(user=request.user)
 
     context={
         "course":course,
-        "form":form
+        "form":form,
+        "passform":passform
     }
     return render(request,"course_detail.html",context)
 

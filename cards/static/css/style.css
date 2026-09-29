@@ -56,10 +56,16 @@
     font-weight: bold;
 }
 .coursediv{
-    border-bottom: 5px solid black;
+    background-color: white;
+    border-radius: 8px;
+    margin: 12px;
 }
 .description{
     padding: 5px;
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    margin: 12px;
 }
 .main-description{
     display: inline-block;
@@ -127,3 +133,17 @@ a:hover{
 .subjects{
     margin-bottom: 4px;
 }
+/* 
+#success-box{
+    background-color: #1c7900;
+    display: inline;
+    padding: 7px;
+    font-size: 16px;
+    border-radius: 20px;
+    color: #ffffff;
+} */
+
+.modalformidcheck input{
+    border:1px solid red;
+}
+

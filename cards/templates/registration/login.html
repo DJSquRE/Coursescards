@@ -24,7 +24,7 @@
 		
 		<hr>
 	</form> -->
-    <form method="POST" action="{% url 'login' %}">
+    <form method="POST" action="{% url 'login' %}" class="needs-validation" novalidate>
         {% csrf_token %}
 	    <h2 class="text-center">Log in to your account</h2>
 
@@ -54,7 +54,8 @@
     <p style="color: red; text-align: left;">{{error}}</p>
         {% endfor %}
     {% endif %}
-    <input style="width: 30%;" type="password" name="password" class="form-control" id="password1" placeholder="Password">
+    <input style="width: 30%;" type="password" name="password" class="form-control" id="password1" placeholder="Password" data-toggle="password">
+    <i class="fa fa-eye-slash" id="togglePassword"></i>
   </div>
 
   <button style="margin-left: 45%;" type="submit" class="btn btn-primary">Submit</button>

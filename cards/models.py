@@ -47,10 +47,10 @@ class Course(models.Model):
 
     description=models.TextField()
 
-    def clean(self):
+    # def clean(self):
     
-            if len(self.description)<50:
-                raise ValidationError("The description must have atleast 50 characters.")
+    #         if len(self.description)<50:
+    #             raise ValidationError("The description must have atleast 50 characters.")
 
     
     def __str__(self):
